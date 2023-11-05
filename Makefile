@@ -14,7 +14,7 @@ RESET_ALL=\e[0m
 
 # Compiler options
 CC=gcc
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Wextra
 
 # File dirs
 SRCDIR=./src
