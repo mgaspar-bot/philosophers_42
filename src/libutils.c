@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:10:46 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/04 17:47:43 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:14:05 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,34 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (num * sign);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	char	*dup;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(s1);
+	dup = (char *)malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[i] = 0;
+	return (dup);
+}
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:49:51 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/04 19:22:01 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:15:03 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ int	init_forks(t_state *state)
 	i = 0;
 	while (i < state->n_philos)
 		pthread_mutex_init(&state->forks[i++], NULL);
+	//ft_putstr_fd("Got out of the second loop\n", 1);
+	pthread_mutex_init(&state->sync_out, NULL);
+	pthread_mutex_init(&state->sync_die, NULL);
 	return (SUCCESS);
 }
-
+/**
+	Philo with index 0 can take fork with index 0
+	and with index n - 1
+*/
 int	init_philos(t_state *state)
 {
 	int	i;
@@ -40,8 +46,10 @@ int	init_philos(t_state *state)
 		state->philos[i].fork2 = i;
 		if (i == 0)
 			state->philos[i].fork1 = state->n_philos - 1;
+		state->philos[i].state = state;
 		i++;
 	}
+	//ft_putstr_fd("Got out of the third loop\n", 1);
 	return (SUCCESS);
 }
 
@@ -65,6 +73,7 @@ int	init_state(int argc, char **argv, t_state *state)
 		if (i == 5)
 			state->max_meals = p;
 	}
+	//ft_putstr_fd("Got out of the first loop\n", 1);
 	if (init_forks(state))
 		return (SYSCALL_FAILED);
 	return (init_philos(state));

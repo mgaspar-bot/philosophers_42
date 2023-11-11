@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:47 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/04 20:09:46 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/11 22:20:29 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	write_usage(void)
 {
-	ft_putstr_fd("Usage: ./philo number_of_philosophers time_to_die ", 1);
-	ft_putstr_fd("time_to_eat time_to_sleep ", 1);
-	ft_putstr_fd("[number_of_times_each_philosopher_must_eat]", 1);
+	ft_putstr_fd("\nUsage: ./philo n_philos t_die ", 1);
+	ft_putstr_fd("t_eat t_sleep ", 1);
+	ft_putstr_fd("[max_meals]\n", 1);
 }
 
 int	validate_args(int argc, char **argv)
@@ -41,5 +41,8 @@ int	main(int argc, char **argv)
 	}
 	if (init_state(argc, argv, &state))
 		return (SYSCALL_FAILED);
+	//what should happen now.
+	// we should start the philo program
+	start_dinner(&state);
 	return (SUCCESS);
 }
