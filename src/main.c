@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:47 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/11 22:20:29 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:47:15 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	write_usage(void)
 {
 	ft_putstr_fd("\nUsage: ./philo n_philos t_die ", 1);
 	ft_putstr_fd("t_eat t_sleep ", 1);
-	ft_putstr_fd("[max_meals]\n", 1);
+	ft_putstr_fd("[max_meals]\n\n", 1);
 }
 
 int	validate_args(int argc, char **argv)

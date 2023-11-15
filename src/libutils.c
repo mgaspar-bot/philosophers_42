@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:10:46 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/11 23:14:05 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:45:56 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,6 @@ int	ft_atoi(const char *nptr)
 	return (num * sign);
 }
 
-char	*ft_strdup(const char *s1)
-{
-	int		len;
-	char	*dup;
-	int		i;
-
-	i = 0;
-	len = ft_strlen(s1);
-	dup = (char *)malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	while (i < len)
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = 0;
-	return (dup);
-}
-
 int	ft_strlen(const char *s)
 {
 	int	i;
@@ -81,4 +61,58 @@ int	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	char	*dup;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(s1);
+	dup = (char *)malloc((len + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[i] = 0;
+	ft_putstr_fd(dup, 1);
+	return (dup);
+}
+
+/**
+ * this join frees the str params,
+ * so we should always use it with allocated strings
+ * **/
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*nova;
+	int		talla;
+	int		i;
+
+	talla = (ft_strlen(s1) + ft_strlen(s2) + 1);
+	i = 0;
+	nova = (char *)malloc(talla * sizeof(char));
+	if (!nova)
+		return (NULL);
+	while (i < ft_strlen(s1))
+	{
+		nova[i] = s1[i];
+		i++;
+	}
+	while (i < talla - 1)
+	{
+		nova[i] = *s2;
+		i++;
+		s2++;
+	}
+	nova[i] = 0;
+	free((void *)s1);
+	write(1, "here\n", 5);
+	free((void *)s2);
+	return (nova);
 }
