@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:49:51 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/11 23:15:03 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:38:02 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	init_philos(t_state *state)
 		state->philos[i].state = state;
 		i++;
 	}
-	//ft_putstr_fd("Got out of the third loop\n", 1);
 	return (SUCCESS);
 }
 
@@ -73,6 +72,7 @@ int	init_state(int argc, char **argv, t_state *state)
 		if (i == 5)
 			state->max_meals = p;
 	}
+	state->is_anyone_dead = 0;
 	//ft_putstr_fd("Got out of the first loop\n", 1);
 	if (init_forks(state))
 		return (SYSCALL_FAILED);

@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:10:46 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 20:45:56 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:55:45 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,9 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	dup[i] = 0;
-	ft_putstr_fd(dup, 1);
 	return (dup);
 }
 
-/**
- * this join frees the str params,
- * so we should always use it with allocated strings
- * **/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*nova;
@@ -111,8 +106,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s2++;
 	}
 	nova[i] = 0;
-	free((void *)s1);
-	write(1, "here\n", 5);
-	free((void *)s2);
 	return (nova);
 }
