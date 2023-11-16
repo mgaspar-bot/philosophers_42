@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:50:30 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/16 19:58:54 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:43:23 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,32 @@ void	*routine(void *ptr)
 		ft_sleep(state->t_eat / 10);
 	while (!state->is_anyone_dead)
 	{
-		if (am_i_dead(philo, state))
+		if (state_change(SC_FORK_TAKEN, philo, &state->forks[philo->fork1]))
 		{
-			state->is_anyone_dead = 1;
+			pthread_mutex_unlock(&state->forks[philo->fork1]);
 			break ;
 		}
-		eat(philo);
-		write_message(SC_SLEEPING, philo->fork2, state);
+		if (state_change(SC_FORK_TAKEN, philo, &state->forks[philo->fork2]))
+		{
+			pthread_mutex_unlock(&state->forks[philo->fork1]);
+			pthread_mutex_unlock(&state->forks[philo->fork2]);
+			break ;
+		}
+		philo->last_meal = get_running_time(state);
+		if (state_change(SC_EATING, philo, NULL))
+		{
+			pthread_mutex_unlock(&state->forks[philo->fork1]);
+			pthread_mutex_unlock(&state->forks[philo->fork2]);
+			break ;
+		}
 		ft_sleep(state->t_sleep);
-		write_message(SC_THINKING, philo->fork2, state);
+		pthread_mutex_unlock(&state->forks[philo->fork1]);
+		pthread_mutex_unlock(&state->forks[philo->fork2]);
+		if (state_change(SC_SLEEPING, philo, NULL))
+			break ;
+		ft_sleep(state->t_sleep);
+		if (state_change(SC_THINKING, philo, NULL))
+			break ;
 	}
 	return (NULL);
 }
