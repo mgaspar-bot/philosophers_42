@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:50:30 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 23:05:54 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:58:54 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,20 @@ void	*routine(void *ptr)
 
 	philo = (t_philo *)ptr;
 	state = philo->state;
+	philo->last_meal = 0;
 	if (philo->fork2 % 2 != 0)
 		ft_sleep(state->t_eat / 10);
 	while (!state->is_anyone_dead)
 	{
+		if (am_i_dead(philo, state))
+		{
+			state->is_anyone_dead = 1;
+			break ;
+		}
 		eat(philo);
-		if (am_i_dead(philo, state))
-			break ;
 		write_message(SC_SLEEPING, philo->fork2, state);
-		if (am_i_dead(philo, state))
-			break ;
 		ft_sleep(state->t_sleep);
-		if (am_i_dead(philo, state))
-			break ;
 		write_message(SC_THINKING, philo->fork2, state);
-		if (am_i_dead(philo, state))
-			break ;
 	}
 	return (NULL);
 }
@@ -62,28 +60,10 @@ int	start_dinner(t_state *state)
 			&state->philos[i]);
 		i++;
 	}
-	while (1)
-	{
-		i = 0;
-		while (i < state->n_philos)
-		{
-			if (get_running_time(state) - state->philos[i].last_meal
-				> (u_int64_t)state->t_die)
-			{
-				state->is_anyone_dead = 1;
-				write_message(SC_DIED, i, state);
-				break ;
-			}
-			i++;
-		}
-		if (state->is_anyone_dead)
-			break ;
-	}
-	while(0 <= i)
+	while (0 <= i)
 	{
 		pthread_join(state->philos[i].thread, NULL);
 		i--;
 	}
-
 	return (SUCCESS);
 }

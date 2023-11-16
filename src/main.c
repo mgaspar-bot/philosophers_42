@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:47 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 18:47:15 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:36:59 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	main(int argc, char **argv)
 	}
 	if (init_state(argc, argv, &state))
 		return (SYSCALL_FAILED);
-	//what should happen now.
-	// we should start the philo program
 	start_dinner(&state);
 	return (SUCCESS);
 }

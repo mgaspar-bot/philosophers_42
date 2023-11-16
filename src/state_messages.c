@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:31:24 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 23:02:14 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:54:56 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	write_final_message(int philo_index, t_state *state)
 
 	now = get_running_time(state);
 	pthread_mutex_lock(&state->sync_out);
-	printf("%llu %d %s", now, philo_index, SC_DIED);
+	printf("%llu %d %s\n", now, philo_index, SC_DIED);
 }
 
 void	write_message(char *state_change, int philo_index, t_state *state)
