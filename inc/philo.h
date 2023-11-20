@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:56:52 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 23:06:03 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:13:36 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ u_int64_t	get_time(void);
 u_int64_t	get_running_time(t_state *state);
 void		ft_sleep(u_int64_t t_sleep);
 void		eat(t_philo *philo);
+void		ft_exit(t_state *state);
 void		ft_putstr_fd(char *s, int fd);
 int			ft_atoi(const char *nptr);
 char		*ft_strdup(const char *s1);

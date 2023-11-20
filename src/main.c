@@ -6,11 +6,35 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:47 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/15 18:47:15 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:32:04 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	deathcheck(t_state *state)
+{
+	int	i;
+
+	while (1)
+	{
+		i = 0;
+		while (i < state->n_philos)
+		{
+			if (get_running_time(state) - state->philos[i].last_meal
+				> (u_int64_t)state->t_die)
+			{
+				state->is_anyone_dead = 1;
+				write_final_message(i, state);
+				ft_exit(state);
+				break ;
+			}
+			i++;
+		}
+		if (state->is_anyone_dead)
+			break ;
+	}
+}
 
 void	write_usage(void)
 {
@@ -41,8 +65,7 @@ int	main(int argc, char **argv)
 	}
 	if (init_state(argc, argv, &state))
 		return (SYSCALL_FAILED);
-	//what should happen now.
-	// we should start the philo program
 	start_dinner(&state);
+	deathcheck(&state);
 	return (SUCCESS);
 }
