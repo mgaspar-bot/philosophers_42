@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:56:52 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/20 20:13:36 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:28:18 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_philo {
 	int			fork2;
 	t_state		*state;
 	u_int64_t	last_meal;
+	int			meals_eaten;
+	int			full;
 }	t_philo;
 
 typedef struct s_state {
@@ -49,6 +51,7 @@ typedef struct s_state {
 	pthread_mutex_t	sync_die;
 	int				max_meals;
 	int				is_anyone_dead;
+	int				is_everyone_full;
 }	t_state;
 
 int			init_state(int argc, char **argv, t_state *state);

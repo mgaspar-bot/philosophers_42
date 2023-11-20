@@ -6,34 +6,41 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:47 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/20 20:32:04 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:29:28 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	deathcheck(t_state *state)
+int	fullcheck(t_state *state, int i)
 {
-	int	i;
+	static int	full_philos = 0;
 
-	while (1)
+	if (!state->philos[i].full
+		&& state->philos[i].meals_eaten == state->max_meals)
 	{
-		i = 0;
-		while (i < state->n_philos)
+		state->philos[i].full = 1;
+		full_philos++;
+		if (full_philos == state->n_philos)
 		{
-			if (get_running_time(state) - state->philos[i].last_meal
-				> (u_int64_t)state->t_die)
-			{
-				state->is_anyone_dead = 1;
-				write_final_message(i, state);
-				ft_exit(state);
-				break ;
-			}
-			i++;
+			state->is_anyone_dead = 1;
+			write_message("Everyone full\n", i, state);
+			return (1);
 		}
-		if (state->is_anyone_dead)
-			break ;
 	}
+	return (0);
+}
+
+int	deathcheck(t_state *state, int i)
+{
+	if (get_running_time(state) - state->philos[i].last_meal
+		> (u_int64_t)state->t_die)
+	{
+		state->is_anyone_dead = 1;
+		write_final_message(i, state);
+		return (1);
+	}
+	return (0);
 }
 
 void	write_usage(void)
@@ -57,6 +64,7 @@ int	validate_args(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_state	state;
+	int		i;
 
 	if (validate_args(argc, argv))
 	{
@@ -66,6 +74,20 @@ int	main(int argc, char **argv)
 	if (init_state(argc, argv, &state))
 		return (SYSCALL_FAILED);
 	start_dinner(&state);
-	deathcheck(&state);
+	while (1)
+	{
+		i = -1;
+		while (++i < state.n_philos)
+		{
+			if (deathcheck(&state, i)
+				|| (state.max_meals != -1 && fullcheck(&state, i)))
+			{
+				ft_exit(&state);
+				break ;
+			}
+		}
+		if (state.is_anyone_dead)
+			break ;
+	}
 	return (SUCCESS);
 }
