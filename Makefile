@@ -32,7 +32,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADER) | $(OBJDIR) $(LIB)
 
 $(NAME): $(OBJ) $(HEADER)
 	@printf "$(CYAN)\n\n\tLinking...$(RESET_ALL)\n\n"
-	$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(LDFLAGS) -g -fsanitize=thread -o $(NAME)
 
 $(OBJDIR):
 	@printf "$(CYAN)\n\n\tNo obj directory found, creating it...$(RESET_ALL)\n\n"

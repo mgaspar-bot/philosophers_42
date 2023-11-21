@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:56:52 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/20 21:28:18 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:11:27 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_philo {
 	t_state		*state;
 	u_int64_t	last_meal;
 	int			meals_eaten;
-	int			full;
 }	t_philo;
 
 typedef struct s_state {
@@ -63,6 +62,7 @@ u_int64_t	get_running_time(t_state *state);
 void		ft_sleep(u_int64_t t_sleep);
 void		eat(t_philo *philo);
 void		ft_exit(t_state *state);
+void		loop_check(t_state *state);
 void		ft_putstr_fd(char *s, int fd);
 int			ft_atoi(const char *nptr);
 char		*ft_strdup(const char *s1);

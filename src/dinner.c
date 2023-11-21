@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:50:30 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/20 20:47:27 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:12:10 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	*routine(void *ptr)
 	while (!state->is_anyone_dead)
 	{
 		eat(philo);
+		if (state->max_meals != -1 && philo->meals_eaten == state->max_meals)
+			break ;
 		write_message(SC_SLEEPING, philo->fork2, state);
 		ft_sleep(state->t_sleep);
 		write_message(SC_THINKING, philo->fork2, state);
