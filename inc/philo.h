@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:56:52 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:11:27 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:33:38 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo {
 	t_state		*state;
 	u_int64_t	last_meal;
 	int			meals_eaten;
+	int			is_eating;
 }	t_philo;
 
 typedef struct s_state {

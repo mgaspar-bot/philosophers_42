@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:50:30 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:12:10 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:34:39 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	eat(t_philo *philo)
 	t_state		*state;
 	u_int64_t	start;
 
+	philo->is_eating = 1;
 	state = philo->state;
 	start = state->t_start;
 	take_forks(state, philo);
@@ -34,6 +35,7 @@ void	eat(t_philo *philo)
 	ft_sleep(state->t_eat);
 	pthread_mutex_unlock(&state->forks[philo->fork1]);
 	pthread_mutex_unlock(&state->forks[philo->fork2]);
+	philo->is_eating = 0;
 }
 
 void	*routine(void *ptr)

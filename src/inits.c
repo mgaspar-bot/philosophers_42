@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:49:51 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:12:15 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:34:08 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	init_philos(t_state *state)
 			state->philos[i].fork1 = state->n_philos - 1;
 		state->philos[i].state = state;
 		state->philos[i].meals_eaten = 0;
+		state->philos[i].is_eating = 0;
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:43:35 by mgaspar-          #+#    #+#             */
-/*   Updated: 2023/11/21 22:26:26 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:37:42 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	loop_check(t_state *state)
 		i = -1;
 		while (++i < state->n_philos)
 		{
-			if (deathcheck(state, i))
+			if ((state->n_philos == 1 || !state->philos[i].is_eating)
+				&& deathcheck(state, i))
 			{
 				ft_exit(state);
 				break ;
